@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Hundir La Flota</string>
+    <string name="credits">Por Rafael Cristian Barbieru</string>
+
+    <string name="empezar">Empezar</string>
+    <string name="temas">Temas</string>
+    <string name="puntuaciones">Puntuaciones</string>
+    <string name="ayuda">Ayuda</string>
+
+    <string name="ok">¡Entendido!</string>
+
+    <string name="info_title">Ayuda</string>
+    <string name="info_error_title">Error</string>
+    <string name="info_msg_menu">
+        - Para empezar el juego pincha en "Empezar"\n
+        - Para cambiar de tema pincha en "Temas"\n
+        - Para ver las mejores puntuaciones pincha en "Puntuaciones"\n
+        - Si necesitas ayuda en cualquier sección puedes acceder a ella desde la barra superior.
+    </string>
+    <string name="info_msg_prep">
+        En esta sección tienes que colocar tus barcos en tu tablero. La manera de hacerlo es
+        eligiendo el tipo de barco que quieres colocar desde el menú superior y pinchar
+        en una casilla del tablero para colocarlo.\n\n
+
+        Tienes que colocar todos los barcos que se te dan; para saber cuántos te quedan por
+        colocar se te mostrará un número al lado del tipo de cada barco en el menú superior.\n\n
+
+        Al elgir un barco de más de una casilla deberás colocar la parte inferior del barco en una casilla
+        de tu elección y la aplicación te colocará el resto del barco en las casillas superiores.\n
+        ¡CUIDADO! No puedes colocar un barco en una casilla ocupada.
+    </string>
+    <string name="info_msg_partida">
+        Para empezar a jugar el juego tienes que pinchar en "Empezar", tanto desde
+        el menú principal como desde la barra superior.
+        A continuación deberás elegir la dificultad en la que jugar.
+        Se te permitirá posicionar tus barcos y empezará el juego.
+        Para atacar a un barco pulsa en su posición en el tablero del enemigo.
+        No podrás atacar dos veces en la misma posición.
+        Gana el primero que destruya los barcos enemigos.
+    </string>
+    <string name="info_error_selecciona_barco">
+        ¡Debes seleccionar un tipo de barco antes de poder colocarlo en el tablero!
+    </string>
+    <string name="info_error_posicion_invalida">
+        ¡La posición que has elegido no permite que el resto del barco se cree!
+        Coloca el barco de manera que haya suficiente espacio a la derecha para que
+        el resto del barco se cree.
+    </string>
+    <string name="info_error_no_mas_barcos">
+        ¡No quedan más barcos de este tipo!
+    </string>
+
+    <string name="seleccionaElBarco">Selecciona el tipo de barco</string>
+    <string name="fragata">Fragata (1 casilla)</string>
+    <string name="buque">Buque de guerra (2 casillas verticales)</string>
+    <string name="portaaviones">Portaaviones (3 casillas verticales)</string>
+    <string name="necesarios">Barcos que quedan</string>
+
+    <string name="theme_title">Selección de temas</string>
+    <string-array name="theme_options">
+        <item>Tema básico</item>
+        <item>Tema premium</item>
+    </string-array>
+    <string name="theme_basic_toast">Se ha seleccionado el tema básico</string>
+    <string name="theme_premium_toast">Se ha seleccionado el tema premium</string>
+
+    <string name="difficulty_title">Selección de dificultad</string>
+    <string-array name="difficulty_options">
+        <item>Marinero</item>
+        <item>Capitán</item>
+        <item>Almirante</item>
+    </string-array>
+
+    <string name="titulo_tablero_jugador">Tu tablero</string>
+    <string name="titulo_tablero_enemigo">Tablero del enemigo</string>
+
+</resources>

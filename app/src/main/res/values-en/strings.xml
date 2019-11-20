@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Battleship Royale</string>
+    <string name="credits">By Rafael Cristian Barbieru</string>
+
+    <string name="empezar">Start</string>
+    <string name="temas">Themes</string>
+    <string name="puntuaciones">Highscores</string>
+    <string name="ayuda">Help</string>
+
+    <string name="ok">Got it!</string>
+
+    <string name="info_title">Help</string>
+    <string name="info_error_title">Error</string>
+    <string name="info_msg_menu">
+        - To start the game click on "Start"\n
+        - To change the displayed theme click on "Themes"\n
+        - To see the highscores click on "Highscores"\n
+        - If you need help in any section, you can access to it through the top bar.
+    </string>
+    <string name="info_msg_prep">
+        In this section you have to put your ships on your grid. The way to do it is by
+        choosing the type of ship you want to put from the menu on top and click in the
+        box where you want to put it.\n\n
+
+        You must use all the ships provided; in order to know how many are left to use you\'re
+        given a number next to the type of ship you\'re about to use, in the same menu as the types of ships.\n\n
+
+        When you want to use a ship that\'s larger than one square, you\'ll have to put the bottom of the
+        ship on a square and the app will automatically put the rest of the parts on top.\n
+        BE CAREFUL! You can\'t put a ship in an already occupied square.
+
+
+    </string>
+    <string name="info_msg_partida">
+        Para empezar a jugar el juego tienes que pinchar en "Empezar", tanto desde
+        el menú principal como desde la barra superior.
+        A continuación deberás elegir la dificultad en la que jugar.
+        Se te permitirá posicionar tus barcos y empezará el juego.
+        Para atacar a un barco pulsa en su posición en el tablero del enemigo.
+        No podrás atacar dos veces en la misma posición.
+        Gana el primero que destruya los barcos enemigos.
+    </string>
+    <string name="info_error_selecciona_barco">
+        You have to choose a ship type before you can place it on the grid!
+    </string>
+    <string name="info_error_posicion_invalida">
+        The position you chose doesn\'t allow the rest of the ship to be created!
+        Place the ship in a way that there is enough space on the right to allow
+        the rest of the ship to be created.
+    </string>
+    <string name="info_error_no_mas_barcos">
+        There are no more ships of this type left!
+    </string>
+
+    <string name="seleccionaElBarco">Select the type of ship</string>
+    <string name="fragata">Frigate (1 sqare)</string>
+    <string name="buque">Warship (2 vertical squares)</string>
+    <string name="portaaviones">Aircraft carrier (3 vertical squares)</string>
+    <string name="necesarios">Ships left</string>
+
+    <string name="theme_title">Theme selection</string>
+    <string-array name="theme_options">
+        <item>Basic theme</item>
+        <item>Premium theme</item>
+    </string-array>
+    <string name="theme_basic_toast">Basic theme has been selected</string>
+    <string name="theme_premium_toast">Premium theme has been selected</string>
+
+    <string name="difficulty_title">Difficulty selection</string>
+    <string-array name="difficulty_options">
+        <item>Seaman</item>
+        <item>Captain</item>
+        <item>Admiral</item>
+    </string-array>
+
+    <string name="titulo_tablero_jugador">Your board</string>
+    <string name="titulo_tablero_enemigo">Enemy\'s board</string>
+</resources>

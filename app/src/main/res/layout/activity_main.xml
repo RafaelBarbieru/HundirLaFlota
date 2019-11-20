@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/colorLightBg"
+    tools:context=".activities.MainActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"></include>
+
+    <TextView
+        android:id="@+id/tv_titulo_tablero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_creditos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/credits"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_titulo_tablero"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="@+id/tv_titulo_tablero"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_tablero" />
+
+    <Button
+        android:id="@+id/bt_empezar"
+        android:layout_width="171dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="onButtonEmpezar"
+        android:text="@string/empezar"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tv_creditos"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toStartOf="@+id/tv_creditos"
+        app:layout_constraintTop_toBottomOf="@+id/tv_creditos" />
+
+    <Button
+        android:id="@+id/bt_opciones"
+        android:layout_width="171dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="onButtonTemas"
+        android:text="@string/temas"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tv_creditos"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="@+id/tv_creditos"
+        app:layout_constraintTop_toBottomOf="@+id/bt_empezar" />
+
+    <Button
+        android:id="@+id/bt_puntuaciones"
+        android:layout_width="171dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="onButtonPuntuaciones"
+        android:text="@string/puntuaciones"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tv_creditos"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="@+id/tv_creditos"
+        app:layout_constraintTop_toBottomOf="@+id/bt_opciones" />
+
+    <Button
+        android:id="@+id/bt_opciones3"
+        android:layout_width="171dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="onButtonAyuda"
+        android:text="@string/ayuda"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tv_creditos"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="@+id/tv_creditos"
+        app:layout_constraintTop_toBottomOf="@+id/bt_puntuaciones" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
