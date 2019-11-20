@@ -15,7 +15,7 @@ public class GameActivity extends AppCompatActivity {
     private Toolbar toolbar;                                                // La barra superior
     private TableLayout tb_grid_player;                                    // El tablero físico
     private Grid grid;
-
+//comentado
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
