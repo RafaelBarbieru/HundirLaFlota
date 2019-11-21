@@ -1,8 +1,10 @@
 package com.example.hundirlaflota.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -28,7 +30,6 @@ public class Grid {
         data = new int[rows][columns];
         for (int i=0; i<rows; i++) {
             for (int j=0; j<columns; j++) {
-                Log.wtf("DRAWDATA","Se pone un 0 en la posición i:" + i + ", j:" + j);
                 data[i][j] = 0;
             }
         }
@@ -72,6 +73,7 @@ public class Grid {
      * @param data
      */
     public void drawGrid(Activity activity, TableLayout tableLayout, int[][] data) {
+        tableLayout.removeAllViews();
         int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
         int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
         TableRow[] trows;
@@ -157,23 +159,31 @@ public class Grid {
     public int[][] generateData() {
         int[][] data = new int[rows][columns];
         Random r = new Random();
-        switch (GameConfig.gameDifficulty) {
-            case GameConfig.DIFICULTAD_FACIL:
-                for (int i=0; i<GameConfig.NBARCOS_FACIL; i++) {
-                    data[r.nextInt(rows)][r.nextInt(columns)] = r.nextInt(1);
-                }
-                break;
-            case GameConfig.DIFICULTAD_MEDIA:
-                for (int i=0; i<GameConfig.NBARCOS_MEDIA; i++) {
-                    data[r.nextInt(rows)][r.nextInt(columns)] = r.nextInt(1);
-                }
-                break;
-            case GameConfig.DIFICULTAD_DIFICIL:
-                for (int i=0; i<GameConfig.NBARCOS_DIFICIL; i++) {
-                    data[r.nextInt(rows)][r.nextInt(columns)] = r.nextInt(1);
-                }
-                break;
+        for (int i=0; i<GameConfig.NBARCOS[GameConfig.gameDifficulty]; i++) {
+            int rndRow = r.nextInt(rows);
+            int rndCol = r.nextInt(columns);
+            if (data[rndRow][rndCol] != 1) {
+                data[rndRow][rndCol] = 1;
+            } else {
+                i--;
+            }
         }
         return data;
+    }
+
+    /**
+     * Método que asigna a todos los elementos del grid un onCLickListener
+     */
+    public void setOnClickListeners(View.OnClickListener listener, TableLayout tb_grid) {
+        TableRow trow;
+        // Se recorren todas las filas
+        for (int i = 0; i < tb_grid.getChildCount(); i++) {
+            trow = (TableRow) tb_grid.getChildAt(i);
+            // Se recorren todos los elementos de una fila
+            for (int j = 0; j < trow.getChildCount(); j++) {
+                // A cada elemento de la fila se le asigna un onClickListener
+                trow.getChildAt(j).setOnClickListener(listener);
+            }
+        }
     }
 }

@@ -50,6 +50,8 @@
         ¡No quedan más barcos de este tipo!
     </string>
 
+    <string name="info_error_no_cambiar">¡No puedes cambiar la posición de tus barcos durante la partida!</string>
+
     <string name="seleccionaElBarco">Selecciona el tipo de barco</string>
     <string name="fragata">Fragata (1 casilla)</string>
     <string name="buque">Buque de guerra (2 casillas verticales)</string>
@@ -73,5 +75,7 @@
 
     <string name="titulo_tablero_jugador">Tu tablero</string>
     <string name="titulo_tablero_enemigo">Tablero del enemigo</string>
+    <string name="barcos_restantes_enemigo">Barcos enemigos restantes:</string>
+    <string name="barcos_restantes_jugador">Barcos aliados restantes:</string>
 
 </resources>

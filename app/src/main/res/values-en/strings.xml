@@ -53,6 +53,8 @@
         There are no more ships of this type left!
     </string>
 
+    <string name="info_error_no_cambiar">You can\'t change the position of your ships during the game!</string>
+
     <string name="seleccionaElBarco">Select the type of ship</string>
     <string name="fragata">Frigate (1 sqare)</string>
     <string name="buque">Warship (2 vertical squares)</string>
@@ -76,4 +78,6 @@
 
     <string name="titulo_tablero_jugador">Your board</string>
     <string name="titulo_tablero_enemigo">Enemy\'s board</string>
+    <string name="barcos_restantes_enemigo">Enemy ships remaining:</string>
+    <string name="barcos_restantes_jugador">Allied ships remaining:</string>
 </resources>

@@ -82,7 +82,7 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
         grid.drawGrid(this, tb_grid);
 
         // Se asigna a cada elemento del tablero un onClickListener
-        setOnClickListeners();
+        grid.setOnClickListeners(this, tb_grid);
 
         // Según la dificultad elegida, se inicializa nBarcos y se le asigna valores
         nBarcos = new int[3];
@@ -164,22 +164,6 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
     }
 
     /**
-     * Método que asigna a todos los elementos del grid un onCLickListener
-     */
-    private void setOnClickListeners() {
-        TableRow trow;
-        // Se recorren todas las filas
-        for (int i = 0; i < tb_grid.getChildCount(); i++) {
-            trow = (TableRow) tb_grid.getChildAt(i);
-            // Se recorren todos los elementos de una fila
-            for (int j = 0; j < trow.getChildCount(); j++) {
-                // A cada elemento de la fila se le asigna un onClickListener
-                trow.getChildAt(j).setOnClickListener(this);
-            }
-        }
-    }
-
-    /**
      * Método que aplica un código de color a los TextView de los barcos necesarios según la dificultad:
      * ROJO - Si aún quedan barcos de ese tipo por colocar
      * VERDE - Si no quedan barcos de ese tipo por colocar
@@ -230,10 +214,8 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
         // Se recorren todas las filas
         for (int i = 0; i < tb_grid.getChildCount(); i++) {
             trow = (TableRow) tb_grid.getChildAt(i);
-            Log.wtf("DRAWDATA", "For principal: i:" + i);
             // Se recorren todos los elementos de la fila
             for (int j = 0; j < trow.getChildCount(); j++) {
-                Log.wtf("DRAWDATA", "For principal: i:" + i + ", j:" + j);
                 // Si el elemento de la fila se corresponde con la vista
                 if (trow.getChildAt(j) == v) {
 
@@ -250,7 +232,6 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
                             ((ImageButton) v).setImageResource(GameConfig.BASIC_SHIP_ID);
 
                             // Se accede al campo data de grid y se sustituye el valor de agua por el de barco
-                            Log.wtf("DRAWDATA", "Se pone un " + GameConfig.DATA_BARCO + " en la posicion i:" + (i-4) + ", j:" + j);
                             grid.setDataAtPos(i-4, j, GameConfig.DATA_BARCO);
 
                             // Se resta en 1 el número de fragatas disponibles
@@ -283,7 +264,6 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
                                 ((ImageButton) trow.getChildAt(j + 1)).setImageResource(GameConfig.BASIC_SHIP_ID);
 
                                 // Se accede al campo data de grid y se sustituye el valor de agua por el de barco
-                                Log.wtf("DRAWDATA", "Se pone un " + GameConfig.DATA_BARCO + " en la posicion i:" + (i-4) + ", j:" + j);
                                 grid.setDataAtPos(i-4, j, GameConfig.DATA_BARCO);
                                 grid.setDataAtPos(i-4, j + 1, GameConfig.DATA_BARCO);
 
@@ -322,7 +302,6 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
                                 ((ImageButton) trow.getChildAt(j + 2)).setImageResource(GameConfig.BASIC_SHIP_ID);
 
                                 // Se accede al campo data de grid y se sustituye el valor de agua por el de barco
-                                Log.wtf("DRAWDATA", "Se pone un " + GameConfig.DATA_BARCO + " en la posicion i:" + (i-4) + ", j:" + j);
                                 grid.setDataAtPos(i-4, j, GameConfig.DATA_BARCO);
                                 grid.setDataAtPos(i-4, j + 1, GameConfig.DATA_BARCO);
                                 grid.setDataAtPos(i-4, j+2, GameConfig.DATA_BARCO);

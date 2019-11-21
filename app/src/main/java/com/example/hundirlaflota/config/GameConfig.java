@@ -30,16 +30,22 @@ public class GameConfig {
     public static final int[] BUQUES =          {1, 2, 4};
     public static final int[] PORTAAVIONES =    {0, 1, 2};
 
-    // Número de barcos según la dificultad
-    public static final int NBARCOS_FACIL = FRAGATAS[DIFICULTAD_FACIL] + BUQUES[DIFICULTAD_FACIL]*2 + PORTAAVIONES[DIFICULTAD_FACIL] * 3;
-    public static final int NBARCOS_MEDIA = FRAGATAS[DIFICULTAD_MEDIA] + BUQUES[DIFICULTAD_MEDIA]*2 + PORTAAVIONES[DIFICULTAD_MEDIA] * 3;
-    public static final int NBARCOS_DIFICIL = FRAGATAS[DIFICULTAD_DIFICIL] + BUQUES[DIFICULTAD_DIFICIL]*2 + PORTAAVIONES[DIFICULTAD_DIFICIL] * 3;
+    // Número de barcos según la dificultad. El índice del array depende de la variable gameDifficulty
+    public static final int[] NBARCOS = {
+            FRAGATAS[DIFICULTAD_FACIL] + BUQUES[DIFICULTAD_FACIL]*2 + PORTAAVIONES[DIFICULTAD_FACIL] * 3,
+            FRAGATAS[DIFICULTAD_MEDIA] + BUQUES[DIFICULTAD_MEDIA]*2 + PORTAAVIONES[DIFICULTAD_MEDIA] * 3,
+            FRAGATAS[DIFICULTAD_DIFICIL] + BUQUES[DIFICULTAD_DIFICIL]*2 + PORTAAVIONES[DIFICULTAD_DIFICIL] * 3
+    };
 
     // Códigos para los datos del tablero lógico
     public static final int DATA_AGUA = 0;
     public static final int DATA_BARCO = 1;
     public static final int DATA_HIT = 2;
     public static final int DATA_MISSED = -1;
+
+    // Códigos para los ID de los tableros
+    public static final int ID_TABLERO_JUGADOR = 0;
+    public static final int ID_TABLERO_ENEMIGO = 1;
 
     // Códigos de las imágenes para el tablero físico
     public static final int BASIC_WATER_ID = R.drawable.ic_water;

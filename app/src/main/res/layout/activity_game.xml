@@ -38,23 +38,48 @@
 
     <TextView
         android:id="@+id/tv_titulo_tablero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_width="257dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="80dp"
         android:text="@string/titulo_tablero_jugador"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_cambiarTablero"
         android:layout_width="50dp"
         android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="72dp"
-        app:layout_constraintStart_toEndOf="@+id/tv_titulo_tablero"
+        android:layout_marginTop="120dp"
+        android:onClick="onButtonCambiarTablero"
+        app:layout_constraintEnd_toEndOf="@+id/tv_titulo_tablero"
+        app:layout_constraintStart_toStartOf="@+id/tv_titulo_tablero"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_autorenew_black_24dp" />
+
+    <TextView
+        android:id="@+id/tv_s_barcosRestantes"
+        android:layout_width="349dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="136dp"
+        android:text="@string/barcos_restantes_jugador"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_d_barcosRestantes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="76dp"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_s_barcosRestantes"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/tv_s_barcosRestantes" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
