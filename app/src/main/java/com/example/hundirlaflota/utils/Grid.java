@@ -72,7 +72,7 @@ public class Grid {
      * @param tableLayout
      * @param data
      */
-    public void drawGrid(Activity activity, TableLayout tableLayout, int[][] data) {
+    public void drawGrid(Activity activity, TableLayout tableLayout, int[][] data, boolean isShipsVisible) {
         tableLayout.removeAllViews();
         int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
         int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
@@ -92,11 +92,18 @@ public class Grid {
                 tcolumns[j].setMinimumWidth(0);
                 tcolumns[j].setLayoutParams(new TableRow.LayoutParams(screenWidth/columns, screenHeight/rows));
                 tcolumns[j].setPadding(0,0,0,0);
-                if (data[i][j] == 1) {
-                    tcolumns[j].setImageResource(GameConfig.BASIC_SHIP_ID);
-                } else {
+                if (data[i][j] == GameConfig.DATA_BARCO) {
+                    if (isShipsVisible)
+                        tcolumns[j].setImageResource(GameConfig.BASIC_SHIP_ID);
+                    else
+                        tcolumns[j].setImageResource(GameConfig.BASIC_WATER_ID);
+                } else if (data[i][j] == GameConfig.DATA_HIT)
+                    tcolumns[j].setImageResource(GameConfig.BASIC_SHIP_HIT_ID);
+                else if (data[i][j] == GameConfig.DATA_MISSED)
+                    tcolumns[j].setImageResource(GameConfig.BASIC_HIT_MISSED_ID);
+                else
                     tcolumns[j].setImageResource(GameConfig.BASIC_WATER_ID);
-                }
+
                 tcolumns[j].setLayoutParams(new TableRow.LayoutParams(tableLayout.getLayoutParams().width / columns, (tableLayout.getLayoutParams().height * 87 / 100) / rows));
                 trows[i].addView(tcolumns[j]);
             }

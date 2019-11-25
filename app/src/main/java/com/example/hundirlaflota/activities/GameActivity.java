@@ -3,6 +3,7 @@ package com.example.hundirlaflota.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +31,8 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
     private TextView tv_barcos_restantes;
     private TextView tv_barcos_restantes_titulo;
     private TextView tv_nombre_tablero;
+    private TextView tv_puntos;
+    private int puntuacion = 0;                 // Puntuación que más tarde se enviará por SMS
 //comentado
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,9 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
         tv_barcos_restantes_titulo = findViewById(R.id.tv_s_barcosRestantes);
         nBarcosEnemigo = GameConfig.NBARCOS[GameConfig.gameDifficulty];
         nBarcosJugador = nBarcosEnemigo;
+        tv_puntos = findViewById(R.id.tv_puntos);
+        tv_puntos.setText(R.string.puntos + puntuacion);
+
 
         // Se muestran cuántos barcos enemigos quedan
         tv_barcos_restantes = findViewById(R.id.tv_d_barcosRestantes);
@@ -73,6 +79,7 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
 
         // Se dibuja el tablero
         cambiarTablero(GameConfig.ID_TABLERO_JUGADOR);
+        actualizarPuntuacion();
 
     }
 
@@ -105,7 +112,7 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                 tv_nombre_tablero.setText(R.string.titulo_tablero_enemigo);
                 tv_barcos_restantes_titulo.setText(R.string.barcos_restantes_enemigo);
                 tv_barcos_restantes.setText(String.valueOf(nBarcosEnemigo));
-                grid.drawGrid(this, tb_grid, dataEnemigo);
+                grid.drawGrid(this, tb_grid, dataEnemigo, false);
                 grid.setOnClickListeners(this, tb_grid);
                 isTableroJugador = false;
                 break;
@@ -113,11 +120,47 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                 tv_nombre_tablero.setText(R.string.titulo_tablero_jugador);
                 tv_barcos_restantes_titulo.setText(R.string.barcos_restantes_jugador);
                 tv_barcos_restantes.setText(String.valueOf(nBarcosJugador));
-                grid.drawGrid(this, tb_grid, dataJugador);
+                grid.drawGrid(this, tb_grid, dataJugador, true);
                 grid.setOnClickListeners(this, tb_grid);
                 isTableroJugador = true;
                 break;
         }
+    }
+
+    /**
+     * Método que actualiza el contador de los barcos enemigos y te lleva a la pantalla de
+     * "Has ganado" si este llega a 0
+     */
+    private void actualizarContadorBarcos() {
+        if (nBarcosJugador > 0 && nBarcosEnemigo > 0) {
+            tv_barcos_restantes.setText(String.valueOf(nBarcosEnemigo));
+        } else {
+            if (nBarcosJugador == 0) {
+                GameConfig.isGanado = false;
+            } else if (nBarcosEnemigo == 0) {
+                GameConfig.isGanado = true;
+            }
+            GameConfig.puntuacion = puntuacion;
+            Intent intent = new Intent(this, EndOfGameActivity.class);
+            startActivity(intent);
+        }
+
+    }
+
+    /**
+     * Método que actualiza el tablero
+     */
+    private void actualizarTablero(boolean isShipsVisible) {
+        if (isShipsVisible)
+            grid.drawGrid(this, tb_grid, dataEnemigo, isShipsVisible);
+        else
+            grid.drawGrid(this, tb_grid, dataEnemigo, isShipsVisible);
+        grid.setOnClickListeners(this, tb_grid);
+
+    }
+
+    private void actualizarPuntuacion() {
+        tv_puntos.setText(getResources().getString(R.string.puntos) + " " + puntuacion);
     }
 
 
@@ -132,10 +175,17 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                 for (int j = 0; j < trow.getChildCount(); j++) {
                     // Si el elemento de la fila se corresponde con la vista
                     if (trow.getChildAt(j) == v) {
-                        if (dataEnemigo[i][j] == 1) {
-                            Toast.makeText(this, "Le has dado xd", Toast.LENGTH_SHORT).show();
+                        if (dataEnemigo[i][j] == GameConfig.DATA_BARCO) {
+                            dataEnemigo[i][j] = GameConfig.DATA_HIT;
+                            nBarcosEnemigo--;
+                            puntuacion += 200;
+                            actualizarContadorBarcos();
+                            actualizarTablero(false);
+                            actualizarPuntuacion();
                         } else {
-                            Toast.makeText(this, "No le has dado puto :v", Toast.LENGTH_SHORT).show();
+                            dataEnemigo[i][j] = GameConfig.DATA_MISSED;
+                            actualizarTablero(false);
+                            actualizarPuntuacion();
                         }
                     }
                 }

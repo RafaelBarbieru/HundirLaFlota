@@ -60,6 +60,10 @@
     <string name="buque">Warship (2 vertical squares)</string>
     <string name="portaaviones">Aircraft carrier (3 vertical squares)</string>
     <string name="necesarios">Ships left</string>
+    <string name="puntos">Points: </string>
+    <string name="veredictoGanado">You won!</string>
+    <string name="veredictoPerdido">You lost!</string>
+    <string name="tupuntuacion">Your score is:</string>
 
     <string name="theme_title">Theme selection</string>
     <string-array name="theme_options">

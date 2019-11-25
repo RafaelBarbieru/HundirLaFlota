@@ -57,6 +57,10 @@
     <string name="buque">Buque de guerra (2 casillas verticales)</string>
     <string name="portaaviones">Portaaviones (3 casillas verticales)</string>
     <string name="necesarios">Barcos que quedan</string>
+    <string name="puntos">Puntos:</string>
+    <string name="veredictoGanado">¡Has ganado!</string>
+    <string name="veredictoPerdido">¡Has perdido!</string>
+    <string name="tupuntuacion">Tu puntuacion es:</string>
 
     <string name="theme_title">Selección de temas</string>
     <string-array name="theme_options">
