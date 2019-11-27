@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -21,7 +22,7 @@ import com.example.hundirlaflota.utils.Grid;
 
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity implements ImageButton.OnClickListener{
+public class GameActivity extends AppCompatActivity implements ImageButton.OnClickListener {
 
     private Toolbar toolbar;                    // La barra superior
     private TableLayout tb_grid;                // El tablero físico
@@ -37,7 +38,8 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
     private TextView tv_puntos;
     private ImageView img_cambiar;
     private int puntuacion = 0;                 // Puntuación que más tarde se enviará por SMS
-//comentado
+
+    //comentado
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +111,7 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
 
     /**
      * Método que dibuja el tablero que se le asigna por parámetro
+     *
      * @param idTablero
      */
     private void cambiarTablero(int idTablero) {
@@ -188,14 +191,16 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                 for (int j = 0; j < trow.getChildCount(); j++) {
                     // Si el elemento de la fila se corresponde con la vista
                     if (trow.getChildAt(j) == v) {
+                        // Si se acierta
                         if (dataEnemigo[i][j] == GameConfig.DATA_BARCO) {
                             dataEnemigo[i][j] = GameConfig.DATA_HIT;
                             nBarcosEnemigo--;
-                            puntuacion += 200;
+                            puntuacion += GameConfig.PUNTOS_BARCO_ACERTADO[GameConfig.gameDifficulty];
                             actualizarContadorBarcos();
                             actualizarTablero(false, false);
                             actualizarPuntuacion();
-                        } else {
+
+                        } else {                            // Si se falla
                             dataEnemigo[i][j] = GameConfig.DATA_MISSED;
                             actualizarTablero(false, false);
                             actualizarPuntuacion();
@@ -203,7 +208,9 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                     }
                 }
             }
-        }  else {
+            // El enemigo ataca
+            atacarCualTonto();
+        } else {
             Toast.makeText(this, "No puedes cambiar", Toast.LENGTH_SHORT).show();
         }
     }
@@ -212,21 +219,15 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
      * Método que hace que la IA ataque al jugador de manera aleatoria
      */
     private void atacarCualTonto() {
-        // Se cambia al tablero del jugador
-        cambiarTablero(GameConfig.ID_TABLERO_JUGADOR);
-
-        // Se desactiva el botón de cambiar de tablero
-        img_cambiar.setEnabled(false);
 
         // Se crea un número aleatorio para las coordenadas x é y
         Random rn = new Random();
-        int posX = rn.nextInt(grid.getColumns());
-        int posY = rn.nextInt(grid.getRows());
+        int posX, posY;
+        do {
+            posX = rn.nextInt(grid.getColumns());
+            posY = rn.nextInt(grid.getRows());
+        } while (dataJugador[posY][posX] == GameConfig.DATA_MISSED || dataJugador[posY][posX] == GameConfig.DATA_HIT);
 
-        try {
-            // Se espera un segundo
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {}
 
         // Se recorren todas las filas
         TableRow trow;
@@ -239,21 +240,23 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                         if (dataJugador[i][j] == GameConfig.DATA_BARCO) {
                             // El enemigo ha acertado
                             dataJugador[i][j] = GameConfig.DATA_HIT;
+                            nBarcosJugador--;
+                            actualizarContadorBarcos();
+                            actualizarPuntuacion();
+                            Toast.makeText(this, "¡El enemigo ha acertado! (X:" + (posX+1) + ",Y:" + (posY+1) + ")" , Toast.LENGTH_SHORT).show();
+                            break;
                         } else {
                             // El enemigo ha fallado
                             dataJugador[i][j] = GameConfig.DATA_MISSED;
+                            Toast.makeText(this, "¡El enemigo ha fallado! (X:" + (posX+1) + ",Y:" + (posY+1) + ")" , Toast.LENGTH_SHORT).show();
+                            break;
                         }
-                        actualizarTablero(true, true);
                     }
+
                 }
             }
         }
 
-        // Se activa el botón de cambiar de tablero
-        img_cambiar.setEnabled(true);
-
-        // Se cambia al tablero del enemigo
-        cambiarTablero(GameConfig.ID_TABLERO_ENEMIGO);
 
     }
 }

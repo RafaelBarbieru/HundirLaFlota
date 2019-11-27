@@ -47,11 +47,18 @@ public class GameConfig {
     public static final int ID_TABLERO_JUGADOR = 0;
     public static final int ID_TABLERO_ENEMIGO = 1;
 
+    // Puntuaciones según nivel de dificultad
+    public static final int[] PUNTOS_BARCO_ACERTADO = {200, 400, 600};
+
     // Códigos de las imágenes para el tablero físico
     public static final int BASIC_WATER_ID = R.drawable.ic_water;
     public static final int BASIC_SHIP_ID = R.drawable.ic_ship;
     public static final int BASIC_SHIP_HIT_ID = R.drawable.ic_hit;
     public static final int BASIC_HIT_MISSED_ID = R.drawable.ic_missed;
+    public static final int PREMIUM_WATER_ID;
+    public static final int PREMIUM_SHIP_ID;
+    public static final int PREMIUM_SHIP_HIT_ID;
+    public static final int PREMIUM_HIT_MISSED_ID;
 
     // Variables de configuración
     public static int gameDifficulty;
