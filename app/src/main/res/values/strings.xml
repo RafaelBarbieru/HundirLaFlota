@@ -61,6 +61,9 @@
     <string name="veredictoGanado">¡Has ganado!</string>
     <string name="veredictoPerdido">¡Has perdido!</string>
     <string name="tupuntuacion">Tu puntuacion es:</string>
+    <string name="noPuedesCambiar">No puedes cambiar la posición de tus barcos ahora mismo</string>
+    <string name="enemigoAcertando">¡El enemigo ha acertado!</string>
+    <string name="enemigoFallando">¡El enemigo ha fallado!</string>
 
     <string name="theme_title">Selección de temas</string>
     <string-array name="theme_options">

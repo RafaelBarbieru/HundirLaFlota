@@ -211,7 +211,7 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
             // El enemigo ataca
             atacarCualTonto();
         } else {
-            Toast.makeText(this, "No puedes cambiar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.noPuedesCambiar), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -242,13 +242,14 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                             dataJugador[i][j] = GameConfig.DATA_HIT;
                             nBarcosJugador--;
                             actualizarContadorBarcos();
+                            puntuacion -= GameConfig.PUNTOS_BARCO_ACERTADO[GameConfig.gameDifficulty];
                             actualizarPuntuacion();
-                            Toast.makeText(this, "¡El enemigo ha acertado! (X:" + (posX+1) + ",Y:" + (posY+1) + ")" , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getResources().getString(R.string.enemigoAcertando) + " (X:" + (posX+1) + ",Y:" + (posY+1) + ")" , Toast.LENGTH_SHORT).show();
                             break;
                         } else {
                             // El enemigo ha fallado
                             dataJugador[i][j] = GameConfig.DATA_MISSED;
-                            Toast.makeText(this, "¡El enemigo ha fallado! (X:" + (posX+1) + ",Y:" + (posY+1) + ")" , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getResources().getString(R.string.enemigoFallando)+ " (X:" + (posX+1) + ",Y:" + (posY+1) + ")" , Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }

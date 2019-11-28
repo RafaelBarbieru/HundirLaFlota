@@ -64,6 +64,9 @@
     <string name="veredictoGanado">You won!</string>
     <string name="veredictoPerdido">You lost!</string>
     <string name="tupuntuacion">Your score is:</string>
+    <string name="noPuedesCambiar">You can\'t move your ships during the battle</string>
+    <string name="enemigoAcertando">The enemy has hit you!</string>
+    <string name="enemigoFallando">The enemy has missed their shot!</string>
 
     <string name="theme_title">Theme selection</string>
     <string-array name="theme_options">
