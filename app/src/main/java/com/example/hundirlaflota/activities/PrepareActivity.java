@@ -242,10 +242,12 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
 
                             // Se verifica si se habilita el botón de empezar o no
                             habilitarBotonEmpezar();
+                            break;
                         } else {
                             // Se muestra un error diciendo que no hay más barcos disponibles
                             InfoDialog infoDialog = new InfoDialog(GameConfig.INFO_ERR_NO_MAS_BARCOS);
                             infoDialog.show(getSupportFragmentManager(), "infoDialog");
+                            break;
                         }
                     } else if (rbt_buque.isChecked()) { // Si el radioButton del buque ha sido seleccionado
 
@@ -275,13 +277,16 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
 
                                 // Se verifica si se habilita el botón de empezar o no
                                 habilitarBotonEmpezar();
+                                break;
                             } else {
                                 InfoDialog infoDialog = new InfoDialog(GameConfig.INFO_ERR_POSICION_INVALIDA);
                                 infoDialog.show(getSupportFragmentManager(), "infoDialog");
+                                break;
                             }
                         } else {
                             InfoDialog infoDialog = new InfoDialog(GameConfig.INFO_ERR_NO_MAS_BARCOS);
                             infoDialog.show(getSupportFragmentManager(), "infoDialog");
+                            break;
                         }
                     } else if (rbt_portaaviones.isChecked()) { // Si el radioButton del portaaviones ha sido seleccionado
 
@@ -314,13 +319,16 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
 
                                 // Se verifica si se habilita el botón de empezar o no
                                 habilitarBotonEmpezar();
+                                break;
                             } else {
                                 InfoDialog infoDialog = new InfoDialog(GameConfig.INFO_ERR_POSICION_INVALIDA);
                                 infoDialog.show(getSupportFragmentManager(), "infoDialog");
+                                break;
                             }
                         } else {
                             InfoDialog infoDialog = new InfoDialog(GameConfig.INFO_ERR_NO_MAS_BARCOS);
                             infoDialog.show(getSupportFragmentManager(), "infoDialog");
+                            break;
                         }
                     } else {
                         InfoDialog infoDialog = new InfoDialog(GameConfig.INFO_ERR_SELECCIONA_BARCO);

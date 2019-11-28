@@ -33,13 +33,12 @@
 
     </string>
     <string name="info_msg_partida">
-        Para empezar a jugar el juego tienes que pinchar en "Empezar", tanto desde
-        el menú principal como desde la barra superior.
-        A continuación deberás elegir la dificultad en la que jugar.
-        Se te permitirá posicionar tus barcos y empezará el juego.
-        Para atacar a un barco pulsa en su posición en el tablero del enemigo.
-        No podrás atacar dos veces en la misma posición.
-        Gana el primero que destruya los barcos enemigos.
+        - To change boards click on the blue arrows button.\n
+        - Attack the enemy by clicking in one of their cells.\n
+        - You won\'t be allowed to attack the same cell twice.\n
+        - After your attack, you\'ll be informed if the enemy\'s attack has affected your ships.\n
+        - You can change the board you want to see in any moment of the game.\n
+        - You can\'t change the position of your ships once the battle has started.\n
     </string>
     <string name="info_error_selecciona_barco">
         You have to choose a ship type before you can place it on the grid!
@@ -67,6 +66,7 @@
     <string name="noPuedesCambiar">You can\'t move your ships during the battle</string>
     <string name="enemigoAcertando">The enemy has hit you!</string>
     <string name="enemigoFallando">The enemy has missed their shot!</string>
+    <string name="ataqueMismaPosicion">You\'ve already attacked this position!</string>
 
     <string name="theme_title">Theme selection</string>
     <string-array name="theme_options">

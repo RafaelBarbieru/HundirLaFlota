@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.hundirlaflota.R;
 import com.example.hundirlaflota.config.GameConfig;
+import com.example.hundirlaflota.dialogs.InfoDialog;
 import com.example.hundirlaflota.utils.Grid;
 
 import java.util.Random;
@@ -97,6 +99,16 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_ayuda:
+                onAyuda();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     // Métodos de los botones
 
     public void onButtonCambiarTablero(View v) {
@@ -133,6 +145,14 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                 isTableroJugador = true;
                 break;
         }
+    }
+
+    /**
+     * Método que muestra la ayuda de la sección
+     */
+    private void onAyuda() {
+        InfoDialog infoDialog = new InfoDialog(GameConfig.INFO_PARTIDA);
+        infoDialog.show(getSupportFragmentManager(), "infoDialog");
     }
 
     /**
@@ -182,6 +202,7 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
 
     @Override
     public void onClick(View v) {
+        boolean disparoCorrecto = true;
         if (!isTableroJugador) {
             TableRow trow;
             // Se recorren todas las filas
@@ -191,25 +212,34 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                 for (int j = 0; j < trow.getChildCount(); j++) {
                     // Si el elemento de la fila se corresponde con la vista
                     if (trow.getChildAt(j) == v) {
-                        // Si se acierta
-                        if (dataEnemigo[i][j] == GameConfig.DATA_BARCO) {
-                            dataEnemigo[i][j] = GameConfig.DATA_HIT;
-                            nBarcosEnemigo--;
-                            puntuacion += GameConfig.PUNTOS_BARCO_ACERTADO[GameConfig.gameDifficulty];
-                            actualizarContadorBarcos();
-                            actualizarTablero(false, false);
-                            actualizarPuntuacion();
+                        if (dataEnemigo[i][j] != GameConfig.DATA_HIT && dataEnemigo[i][j] != GameConfig.DATA_MISSED) {
+                            // Si se acierta
+                            if (dataEnemigo[i][j] == GameConfig.DATA_BARCO) {
+                                dataEnemigo[i][j] = GameConfig.DATA_HIT;
+                                nBarcosEnemigo--;
+                                puntuacion += GameConfig.PUNTOS_BARCO_ACERTADO[GameConfig.gameDifficulty];
+                                actualizarContadorBarcos();
+                                actualizarTablero(false, false);
+                                actualizarPuntuacion();
 
-                        } else {                            // Si se falla
-                            dataEnemigo[i][j] = GameConfig.DATA_MISSED;
-                            actualizarTablero(false, false);
-                            actualizarPuntuacion();
+                            } else {                            // Si se falla
+                                dataEnemigo[i][j] = GameConfig.DATA_MISSED;
+                                actualizarTablero(false, false);
+                                actualizarPuntuacion();
+                            }
+                            disparoCorrecto = true;
+                        } else {
+                            Toast.makeText(this, getResources().getString(R.string.ataqueMismaPosicion), Toast.LENGTH_SHORT).show();
+                            disparoCorrecto = false;
                         }
+
                     }
                 }
             }
             // El enemigo ataca
-            atacarCualTonto();
+            if (disparoCorrecto) {
+                atacarCualTonto();
+            }
         } else {
             Toast.makeText(this, getResources().getString(R.string.noPuedesCambiar), Toast.LENGTH_SHORT).show();
         }

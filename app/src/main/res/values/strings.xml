@@ -30,13 +30,12 @@
         ¡CUIDADO! No puedes colocar un barco en una casilla ocupada.
     </string>
     <string name="info_msg_partida">
-        Para empezar a jugar el juego tienes que pinchar en "Empezar", tanto desde
-        el menú principal como desde la barra superior.
-        A continuación deberás elegir la dificultad en la que jugar.
-        Se te permitirá posicionar tus barcos y empezará el juego.
-        Para atacar a un barco pulsa en su posición en el tablero del enemigo.
-        No podrás atacar dos veces en la misma posición.
-        Gana el primero que destruya los barcos enemigos.
+        - Para cambiar de tablero pulsa en el botón de las flechas azules.\n
+        - Ataca al enemigo pulsando en una de sus casillas.\n
+        - No podrás atacar la misma casilla dos veces.\n
+        - Tras tu ataque se mostrará si el ataque enemigo ha afectado a tus barcos.\n
+        - Puedes cambiar de tablero en cualquier momento de la partida.\n
+        - No puedes cambiar la posición de tus barcos una vez empezada la partida.\n
     </string>
     <string name="info_error_selecciona_barco">
         ¡Debes seleccionar un tipo de barco antes de poder colocarlo en el tablero!
@@ -64,6 +63,7 @@
     <string name="noPuedesCambiar">No puedes cambiar la posición de tus barcos ahora mismo</string>
     <string name="enemigoAcertando">¡El enemigo ha acertado!</string>
     <string name="enemigoFallando">¡El enemigo ha fallado!</string>
+    <string name="ataqueMismaPosicion">¡Ya has atacado esta posición!</string>
 
     <string name="theme_title">Selección de temas</string>
     <string-array name="theme_options">
