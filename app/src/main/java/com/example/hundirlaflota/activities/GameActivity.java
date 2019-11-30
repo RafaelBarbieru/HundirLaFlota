@@ -1,11 +1,7 @@
 package com.example.hundirlaflota.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,8 +13,12 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.hundirlaflota.R;
 import com.example.hundirlaflota.config.GameConfig;
+import com.example.hundirlaflota.dialogs.ConfirmDialog;
 import com.example.hundirlaflota.dialogs.InfoDialog;
 import com.example.hundirlaflota.utils.Grid;
 
@@ -39,9 +39,9 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
     private TextView tv_nombre_tablero;
     private TextView tv_puntos;
     private ImageView img_cambiar;
+    private boolean isGanado;
     private int puntuacion = 0;                 // Puntuación que más tarde se enviará por SMS
 
-    //comentado
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +70,8 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
         grid = new Grid(1, 1);
 
         // Se asignan los datos a los tableros lógicos
-        dataJugador = GameConfig.playerData;
-        dataEnemigo = GameConfig.aiData;
+        dataJugador = (int[][]) getIntent().getBundleExtra("bundle").getSerializable("playerData");
+        dataEnemigo = (int[][]) getIntent().getBundleExtra("bundle").getSerializable("aiData");
 
         // Dependiendo de la dificultad elegida, el tablero cambiará sus dimensiones
         switch (GameConfig.gameDifficulty) {
@@ -109,8 +109,21 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Método que se ejecuta cuando se pulsa el botón de volver
+     */
+    @Override
+    public void onBackPressed() {
+        ConfirmDialog confirmDialog = new ConfirmDialog(this);
+        confirmDialog.show(getSupportFragmentManager(), "confirmDialog");
+    }
+
     // Métodos de los botones
 
+    /**
+     * Método que se ejecuta cuando se pulsa en el botón de cambiar de tablero
+     * @param v
+     */
     public void onButtonCambiarTablero(View v) {
         if (isTableroJugador) {
             cambiarTablero(GameConfig.ID_TABLERO_ENEMIGO);
@@ -163,16 +176,27 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
         if (nBarcosJugador > 0 && nBarcosEnemigo > 0) {
             tv_barcos_restantes.setText(String.valueOf(nBarcosEnemigo));
         } else {
-            if (nBarcosJugador == 0) {
-                GameConfig.isGanado = false;
-            } else if (nBarcosEnemigo == 0) {
-                GameConfig.isGanado = true;
-            }
-            GameConfig.puntuacion = puntuacion;
-            Intent intent = new Intent(this, EndOfGameActivity.class);
-            startActivity(intent);
+            terminarPartida();
         }
 
+    }
+
+    /**
+     * Método que termina la partida ganándola o perdiéndola
+     */
+    private void terminarPartida() {
+        // Si el jugador se queda sin barcos, la partida se considera perdida
+        if (nBarcosJugador == 0) {
+            isGanado = false;
+        }
+        // Si el enemigo se queda sin barcos, la partida se considera ganada
+        else if (nBarcosEnemigo == 0) {
+            isGanado = true;
+        }
+        Intent intent = new Intent(this, EndOfGameActivity.class);
+        intent.putExtra("puntuacion", puntuacion);
+        intent.putExtra("isGanado", isGanado);
+        startActivity(intent);
     }
 
     /**
@@ -195,14 +219,23 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
 
     }
 
+    /**
+     * Método que actualiza el TextView de la puntuación
+     */
     private void actualizarPuntuacion() {
         tv_puntos.setText(getResources().getString(R.string.puntos) + " " + puntuacion);
     }
 
 
+    /**
+     * Método que se ejecuta cada vez que el jugador pulsa en una casilla (aliada o enemiga)
+     * @param v
+     */
     @Override
     public void onClick(View v) {
-        boolean disparoCorrecto = true;
+        boolean disparoCorrecto = true; // Determina si la casilla que se ha pulsado no había sido pulsada antes
+
+        // Controla que el usuario no pulse en sus propias casillas
         if (!isTableroJugador) {
             TableRow trow;
             // Se recorren todas las filas
@@ -215,20 +248,30 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                         if (dataEnemigo[i][j] != GameConfig.DATA_HIT && dataEnemigo[i][j] != GameConfig.DATA_MISSED) {
                             // Si se acierta
                             if (dataEnemigo[i][j] == GameConfig.DATA_BARCO) {
+                                // Se cambia el dato de la casilla del tablero enemigo por barco hundido
                                 dataEnemigo[i][j] = GameConfig.DATA_HIT;
+                                // Se resta uno a los barcos del enemigo
                                 nBarcosEnemigo--;
+                                // Se suma a la puntuación del jugador los puntos correspondientes a la dificultad
                                 puntuacion += GameConfig.PUNTOS_BARCO_ACERTADO[GameConfig.gameDifficulty];
+                                // Se actualizan varios componentes de la GUI
                                 actualizarContadorBarcos();
                                 actualizarTablero(false, false);
                                 actualizarPuntuacion();
+                            }
+                            // Si se falla
+                            else {
 
-                            } else {                            // Si se falla
+                                // Se cambia el dato de la casilla del tablero enemigo por barco hundido
                                 dataEnemigo[i][j] = GameConfig.DATA_MISSED;
+                                // Se actualizan varios componentes de la GUI
                                 actualizarTablero(false, false);
                                 actualizarPuntuacion();
                             }
+                            // Se considera que el disparo es correcto
                             disparoCorrecto = true;
                         } else {
+                            // Se considera que el disparo no es correcto
                             Toast.makeText(this, getResources().getString(R.string.ataqueMismaPosicion), Toast.LENGTH_SHORT).show();
                             disparoCorrecto = false;
                         }
@@ -236,9 +279,9 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
                     }
                 }
             }
-            // El enemigo ataca
+            // Si el disparo es correcto, el enemigo ataca
             if (disparoCorrecto) {
-                atacarCualTonto();
+                enemigoAtaca();
             }
         } else {
             Toast.makeText(this, getResources().getString(R.string.noPuedesCambiar), Toast.LENGTH_SHORT).show();
@@ -248,11 +291,12 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
     /**
      * Método que hace que la IA ataque al jugador de manera aleatoria
      */
-    private void atacarCualTonto() {
+    private void enemigoAtaca() {
 
         // Se crea un número aleatorio para las coordenadas x é y
         Random rn = new Random();
         int posX, posY;
+        // Se sigue generando una posición hasta que la generada coincida con una sobre la que aún no se ha disparado
         do {
             posX = rn.nextInt(grid.getColumns());
             posY = rn.nextInt(grid.getRows());
@@ -263,22 +307,31 @@ public class GameActivity extends AppCompatActivity implements ImageButton.OnCli
         TableRow trow;
         for (int i = 0; i < tb_grid.getChildCount(); i++) {
             trow = (TableRow) tb_grid.getChildAt(i);
+            // Si la coordenada i coincide con la posición Y generada
             if (i == posY) {
                 // Se recorren todas las columnas de la fila
                 for (int j = 0; j < trow.getChildCount(); j++) {
+                    // Si la coordenada j coincide con la posición X generada
                     if (j == posX) {
+                        // Si el dato de la casilla coincide con un barco
                         if (dataJugador[i][j] == GameConfig.DATA_BARCO) {
                             // El enemigo ha acertado
                             dataJugador[i][j] = GameConfig.DATA_HIT;
+                            // Se resta uno a los barcos del jugador
                             nBarcosJugador--;
+                            // Se actualiza el contador gráfico del jugador
                             actualizarContadorBarcos();
+                            // Se resta a la puntuación del jugador los puntos correspondientes a la dificultad
                             puntuacion -= GameConfig.PUNTOS_BARCO_ACERTADO[GameConfig.gameDifficulty];
+                            // Se actualiza el contador gráfico de la puntuación
                             actualizarPuntuacion();
+                            // Se avisa al jugador de que el enemigo ha acertado mediante un Toast, proporcionando las coordenadas del ataque
                             Toast.makeText(this, getResources().getString(R.string.enemigoAcertando) + " (X:" + (posX+1) + ",Y:" + (posY+1) + ")" , Toast.LENGTH_SHORT).show();
                             break;
                         } else {
                             // El enemigo ha fallado
                             dataJugador[i][j] = GameConfig.DATA_MISSED;
+                            // Se avisa al jugador de que el enemigo ha fallado mediante un Toast, proporcionando las coordenadas del ataque
                             Toast.makeText(this, getResources().getString(R.string.enemigoFallando)+ " (X:" + (posX+1) + ",Y:" + (posY+1) + ")" , Toast.LENGTH_SHORT).show();
                             break;
                         }

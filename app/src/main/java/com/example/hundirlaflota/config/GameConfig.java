@@ -63,9 +63,5 @@ public class GameConfig {
     // Variables de configuración
     public static int gameDifficulty;
     public static boolean isPremiumThemeSelected = false;
-    public static int[][] playerData;
-    public static int[][] aiData;
-    public static boolean isGanado;
-    public static int puntuacion;
 
 }

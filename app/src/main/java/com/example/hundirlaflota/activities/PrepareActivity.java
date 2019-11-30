@@ -1,14 +1,8 @@
 package com.example.hundirlaflota.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,12 +14,14 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.hundirlaflota.R;
 import com.example.hundirlaflota.config.GameConfig;
+import com.example.hundirlaflota.dialogs.ConfirmDialog;
 import com.example.hundirlaflota.dialogs.InfoDialog;
 import com.example.hundirlaflota.utils.Grid;
-
-import org.w3c.dom.Text;
 
 public class PrepareActivity extends AppCompatActivity implements ImageButton.OnClickListener {
 
@@ -124,6 +120,15 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Método que se ejecuta cuando se pulsa el botón de volver
+     */
+    @Override
+    public void onBackPressed() {
+        ConfirmDialog confirmDialog = new ConfirmDialog(this);
+        confirmDialog.show(getSupportFragmentManager(), "confirmDialog");
+    }
+
     // Métodos de botones
 
     /**
@@ -157,9 +162,11 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
      * Método que se ejecuta cuando se quiere acceder a Empezar
      */
     public void onEmpezar() {
-        GameConfig.playerData = grid.getData();     // Se asignan los datos del jugador a la variable global
-        GameConfig.aiData = grid.generateData();    // Se asignan los datos generados del enemigo a la variable global
         Intent intent = new Intent(this, GameActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("playerData", grid.getData());
+        bundle.putSerializable("aiData", grid.generateData());
+        intent.putExtra("bundle", bundle);
         startActivity(intent);
     }
 

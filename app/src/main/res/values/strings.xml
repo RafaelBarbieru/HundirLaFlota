@@ -37,6 +37,13 @@
         - Puedes cambiar de tablero en cualquier momento de la partida.\n
         - No puedes cambiar la posición de tus barcos una vez empezada la partida.\n
     </string>
+    <string name="info_msg_saliendo_titulo">Saliendo de la partida</string>
+    <string name="info_msg_saliendo_cuerpo">
+        ¿Estás seguro de que quieres salir de la partida y volver al menú principal?\n
+        ¡Todo el progreso se perderá!
+    </string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
     <string name="info_error_selecciona_barco">
         ¡Debes seleccionar un tipo de barco antes de poder colocarlo en el tablero!
     </string>
