@@ -92,4 +92,9 @@
     <string name="barcos_restantes_enemigo">Barcos enemigos restantes:</string>
     <string name="barcos_restantes_jugador">Barcos aliados restantes:</string>
 
+    <string name="nombre">Nombre</string>
+    <string name="introduce_nombre">Introduce tu nombre para guardar la puntuación</string>
+    <string name="guardar">Guardar</string>
+    <string name="noHayPuntuaciones">No hay puntuaciones disponibles</string>
+
 </resources>

@@ -1,21 +1,22 @@
 package com.example.hundirlaflota.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.hundirlaflota.R;
+import com.example.hundirlaflota.config.DatabaseConfig;
 import com.example.hundirlaflota.config.GameConfig;
 import com.example.hundirlaflota.dialogs.DifficultyDialog;
 import com.example.hundirlaflota.dialogs.InfoDialog;
 import com.example.hundirlaflota.dialogs.ThemeDialog;
+import com.example.hundirlaflota.utils.Database;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DatabaseConfig.database = new Database(this);
+        DatabaseConfig.database.conectarCrearBaseDatos();
+        DatabaseConfig.database.crearTabla();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -66,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DatabaseConfig.database.cerrar();
     }
 
     // Métodos de los botones
@@ -125,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
      * Método que se ejecuta cuando se quiere acceder a Puntuaciones
      */
     public void onPuntuaciones() {
-        Toast.makeText(this, "Has pulsado en Puntuaciones", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ScoreActivity.class);
+        startActivity(intent);
     }
 
     /**

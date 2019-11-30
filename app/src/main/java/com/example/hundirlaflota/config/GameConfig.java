@@ -55,10 +55,10 @@ public class GameConfig {
     public static final int BASIC_SHIP_ID = R.drawable.ic_ship;
     public static final int BASIC_SHIP_HIT_ID = R.drawable.ic_hit;
     public static final int BASIC_HIT_MISSED_ID = R.drawable.ic_missed;
-    /*public static final int PREMIUM_WATER_ID;
-    public static final int PREMIUM_SHIP_ID;
-    public static final int PREMIUM_SHIP_HIT_ID;
-    public static final int PREMIUM_HIT_MISSED_ID;*/
+    public static final int PREMIUM_WATER_ID = R.mipmap.ic_pwater_foreground;
+    public static final int PREMIUM_SHIP_ID = R.mipmap.ic_pship_foreground;
+    public static final int PREMIUM_SHIP_HIT_ID = R.mipmap.ic_phit_foreground;
+    public static final int PREMIUM_HIT_MISSED_ID = R.mipmap.ic_pmissed_foreground;
 
     // Variables de configuración
     public static int gameDifficulty;

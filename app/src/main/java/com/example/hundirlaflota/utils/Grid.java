@@ -1,9 +1,7 @@
 package com.example.hundirlaflota.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
@@ -57,9 +55,12 @@ public class Grid {
                 tcolumns[j].setMaxHeight(0);
                 tcolumns[j].setMinimumHeight(0);
                 tcolumns[j].setMinimumWidth(0);
-                tcolumns[j].setLayoutParams(new TableRow.LayoutParams(screenWidth/columns, screenHeight/rows));
                 tcolumns[j].setPadding(0,0,0,0);
-                tcolumns[j].setImageResource(GameConfig.BASIC_WATER_ID);
+                if (!GameConfig.isPremiumThemeSelected) {
+                    tcolumns[j].setImageResource(GameConfig.BASIC_WATER_ID);
+                } else {
+                    tcolumns[j].setImageResource(GameConfig.PREMIUM_WATER_ID);
+                }
                 tcolumns[j].setLayoutParams(new TableRow.LayoutParams(tableLayout.getLayoutParams().width / columns, (tableLayout.getLayoutParams().height * 87 / 100) / rows));
                 trows[i].addView(tcolumns[j]);
             }
@@ -94,15 +95,30 @@ public class Grid {
                 tcolumns[j].setPadding(0,0,0,0);
                 if (data[i][j] == GameConfig.DATA_BARCO) {
                     if (isShipsVisible)
-                        tcolumns[j].setImageResource(GameConfig.BASIC_SHIP_ID);
+                        if (!GameConfig.isPremiumThemeSelected)
+                            tcolumns[j].setImageResource(GameConfig.BASIC_SHIP_ID);
+                        else
+                            tcolumns[j].setImageResource(GameConfig.PREMIUM_SHIP_ID);
                     else
-                        tcolumns[j].setImageResource(GameConfig.BASIC_WATER_ID);
+                        if (!GameConfig.isPremiumThemeSelected)
+                            tcolumns[j].setImageResource(GameConfig.BASIC_WATER_ID);
+                        else
+                            tcolumns[j].setImageResource(GameConfig.PREMIUM_WATER_ID);
                 } else if (data[i][j] == GameConfig.DATA_HIT)
-                    tcolumns[j].setImageResource(GameConfig.BASIC_SHIP_HIT_ID);
+                    if (!GameConfig.isPremiumThemeSelected)
+                        tcolumns[j].setImageResource(GameConfig.BASIC_SHIP_HIT_ID);
+                    else
+                        tcolumns[j].setImageResource(GameConfig.PREMIUM_SHIP_HIT_ID);
                 else if (data[i][j] == GameConfig.DATA_MISSED)
-                    tcolumns[j].setImageResource(GameConfig.BASIC_HIT_MISSED_ID);
+                    if (!GameConfig.isPremiumThemeSelected)
+                        tcolumns[j].setImageResource(GameConfig.BASIC_HIT_MISSED_ID);
+                    else
+                        tcolumns[j].setImageResource(GameConfig.PREMIUM_HIT_MISSED_ID);
                 else
-                    tcolumns[j].setImageResource(GameConfig.BASIC_WATER_ID);
+                    if (!GameConfig.isPremiumThemeSelected)
+                        tcolumns[j].setImageResource(GameConfig.BASIC_WATER_ID);
+                    else
+                        tcolumns[j].setImageResource(GameConfig.PREMIUM_WATER_ID);
 
                 tcolumns[j].setLayoutParams(new TableRow.LayoutParams(tableLayout.getLayoutParams().width / columns, (tableLayout.getLayoutParams().height * 87 / 100) / rows));
                 trows[i].addView(tcolumns[j]);

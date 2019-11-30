@@ -236,7 +236,10 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
                             v.setEnabled(false);
 
                             // Se cambia la imagen de fondo del botón
-                            ((ImageButton) v).setImageResource(GameConfig.BASIC_SHIP_ID);
+                            if (!GameConfig.isPremiumThemeSelected)
+                                ((ImageButton) v).setImageResource(GameConfig.BASIC_SHIP_ID);
+                            else
+                                ((ImageButton) v).setImageResource(GameConfig.PREMIUM_SHIP_ID);
 
                             // Se accede al campo data de grid y se sustituye el valor de agua por el de barco
                             grid.setDataAtPos(i-4, j, GameConfig.DATA_BARCO);
@@ -269,8 +272,14 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
                                 trow.getChildAt(j + 1).setEnabled(false);
 
                                 // Se cambia la imagen de fondo de los botones
-                                ((ImageButton) v).setImageResource(GameConfig.BASIC_SHIP_ID);
-                                ((ImageButton) trow.getChildAt(j + 1)).setImageResource(GameConfig.BASIC_SHIP_ID);
+                                if (!GameConfig.isPremiumThemeSelected) {
+                                    ((ImageButton) v).setImageResource(GameConfig.BASIC_SHIP_ID);
+                                    ((ImageButton) trow.getChildAt(j + 1)).setImageResource(GameConfig.BASIC_SHIP_ID);
+                                } else {
+                                    ((ImageButton) v).setImageResource(GameConfig.PREMIUM_SHIP_ID);
+                                    ((ImageButton) trow.getChildAt(j + 1)).setImageResource(GameConfig.PREMIUM_SHIP_ID);
+                                }
+
 
                                 // Se accede al campo data de grid y se sustituye el valor de agua por el de barco
                                 grid.setDataAtPos(i-4, j, GameConfig.DATA_BARCO);
@@ -309,9 +318,15 @@ public class PrepareActivity extends AppCompatActivity implements ImageButton.On
                                 trow.getChildAt(j + 2).setEnabled(false);
 
                                 // Se cambia la imagen de fondo de los botones
-                                ((ImageButton) v).setImageResource(GameConfig.BASIC_SHIP_ID);
-                                ((ImageButton) trow.getChildAt(j + 1)).setImageResource(GameConfig.BASIC_SHIP_ID);
-                                ((ImageButton) trow.getChildAt(j + 2)).setImageResource(GameConfig.BASIC_SHIP_ID);
+                                if (!GameConfig.isPremiumThemeSelected) {
+                                    ((ImageButton) v).setImageResource(GameConfig.BASIC_SHIP_ID);
+                                    ((ImageButton) trow.getChildAt(j + 1)).setImageResource(GameConfig.BASIC_SHIP_ID);
+                                    ((ImageButton) trow.getChildAt(j + 2)).setImageResource(GameConfig.BASIC_SHIP_ID);
+                                } else {
+                                    ((ImageButton) v).setImageResource(GameConfig.PREMIUM_SHIP_ID);
+                                    ((ImageButton) trow.getChildAt(j + 1)).setImageResource(GameConfig.PREMIUM_SHIP_ID);
+                                    ((ImageButton) trow.getChildAt(j + 2)).setImageResource(GameConfig.PREMIUM_SHIP_ID);
+                                }
 
                                 // Se accede al campo data de grid y se sustituye el valor de agua por el de barco
                                 grid.setDataAtPos(i-4, j, GameConfig.DATA_BARCO);

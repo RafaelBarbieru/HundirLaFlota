@@ -94,4 +94,9 @@
     <string name="titulo_tablero_enemigo">Enemy\'s board</string>
     <string name="barcos_restantes_enemigo">Enemy ships remaining:</string>
     <string name="barcos_restantes_jugador">Allied ships remaining:</string>
+
+    <string name="nombre">Name</string>
+    <string name="introduce_nombre">Type your name in order to save your score</string>
+    <string name="guardar">Save</string>
+    <string name="noHayPuntuaciones">There are no highscores yet</string>
 </resources>
